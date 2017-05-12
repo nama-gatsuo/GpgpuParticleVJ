@@ -2,3 +2,6 @@
 .DS_Store
 */.DS_Store
 bin/*.app
+
+// Xcode Interface State
+3dFractalVj.xcodeproj/project.xcworkspace/xcuserdata/*/UserInterfaceState.xcuserstate
