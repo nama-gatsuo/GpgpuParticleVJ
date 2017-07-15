@@ -46,7 +46,7 @@ void ofApp::update(){
             int val = m.getArgAsInt32(0);
             
             if (i == 3) cam.setRadius(1.0 + 1000.0 * val / 128.0);
-            else if (i == 4) dt = 0.001 + 0.1 * val / 64.0;
+            else if (i == 4) dt = 0.001 + 0.1 * val / 128.0;
             else scenes[state]->setParam(i, val);
             
         }
@@ -56,7 +56,7 @@ void ofApp::update(){
             
             if (dirs[2] == "0") {
                 scenes[state]->randomize();
-                if (ofRandom(1.0) < 0.06) changeScene();
+                if (ofRandom(1.0) < 0.1) changeScene();
             } else if (dirs[2] == "1") {
                 pe.bang();
             }
@@ -91,7 +91,7 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-    if (key == ' ') scenes[0]->randomize();
+    if (key == ' ') scenes[state]->randomize();
     if (key == 'f') ofToggleFullscreen();    
 }
 

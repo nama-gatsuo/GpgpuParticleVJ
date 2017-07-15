@@ -140,7 +140,7 @@ public:
         z = radius.getValue() * cos(phi);
         
         this->setPosition(x, y, z);
-        this->lookAt(ofVec3f(0,-50,0));
+        this->lookAt(ofVec3f(0,0,0));
     };
     void setRadius(float radius){
         this->radius.to(radius);

@@ -32,7 +32,7 @@ void main(){
     p.z = p.z * scale - scale / 2.0;
 
     gl_Position = modelViewProjectionMatrix * p;
-    gl_PointSize = 3000.0 / gl_Position.w;
-    
+    gl_PointSize = 2000.0 / gl_Position.w;
+
     vColor = color * alpha;
 }

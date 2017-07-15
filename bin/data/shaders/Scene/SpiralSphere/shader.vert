@@ -23,22 +23,22 @@ uniform float time;
 
 
 void main() {
-    
+
     float ri = mod(texcoord.x, rSize);
     float ti = floor(texcoord.x / rSize);
     float si = texcoord.y;
-    
+
     float r = rInit + ri * rStep;
-    float t = 2.0 * PI / tSize * ti + tStep * ri + rand(texcoord) * 0.02;
-    float s = PI / sSize * si + sStep * ri + rand(texcoord) * 0.02;
-    
+    float t = 3.0 * PI / tSize * ti + tStep * ri + rand(texcoord) * 0.03;
+    float s = 1.5 * PI / sSize * si + sStep * ri + rand(texcoord) * 0.03;
+
     vec3 p;
     p.x = r * cos(t) * sin(s);
     p.y = r * sin(t) * sin(s);
     p.z = r * cos(s);
-    
+
     vColor = color;
     gl_Position = modelViewProjectionMatrix * vec4(p.xyz, 1.0);
-    gl_PointSize = 2000.0 / gl_Position.w;
-    
+    gl_PointSize = 1000.0 / gl_Position.w;
+
 }

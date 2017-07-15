@@ -31,7 +31,7 @@ float random(inout vec2 randomVec2) {
 void main() {
 
     vec4 p = vec4(position.xyz, 1.0);
-    
+
     vec2 randomVec2 = vec2(p.x, p.y);
     float r;
 
@@ -48,8 +48,8 @@ void main() {
 
     vColor = color * alpha;
     p = scale * p;
-    
+
     gl_Position = modelViewProjectionMatrix * vec4(p.xyz, 1.0);
-    gl_PointSize = 3000.0 / gl_Position.w;
-    
+    gl_PointSize = 1500.0 / gl_Position.w;
+
 }

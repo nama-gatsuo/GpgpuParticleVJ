@@ -17,7 +17,7 @@ void SpiralSphere::setup(){
                 
                 mesh.addVertex(ofVec3f(0,0,0));
                 mesh.addTexCoord(ofVec2f(t*rSize + r, s));
-                mesh.addColor(ofFloatColor(0.3, 0.3, 0.1));
+                mesh.addColor(ofFloatColor(0.3+ofRandom(-0.1, 0.1), 0.3+ofRandom(-0.1, 0.1), 0.1, 0.2));
                 
             }
         }
