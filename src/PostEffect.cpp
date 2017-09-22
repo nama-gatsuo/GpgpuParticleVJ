@@ -104,8 +104,8 @@ void PostEffect::bang() {
     coin = ofRandom(1.0);
     
     if (coin < 0.4) mode = 0;
-    else if (coin < 0.6) mode = 1;
-    else if (coin < 0.8) mode = 2;
+    else if (coin < 0.6) mode = 2;
+    else if (coin < 0.8) mode = 3;
     else mode = 3;
     
 }
