@@ -3,12 +3,10 @@
 
 //========================================================================
 int main( ){
-    ofGLWindowSettings settings;
+    ofGLFWWindowSettings settings;
     settings.setGLVersion(3, 2);
-    settings.width = 1024;
-    settings.height = 768;
+    settings.setSize(1280, 720);
     ofCreateWindow(settings);
     
 	ofRunApp(new ofApp());
-
 }

@@ -12,6 +12,8 @@
 #include "GalaxyCollision.hpp"
 #include "SpiralSphere.hpp"
 
+#include "ofxSpout.h"
+
 class ofApp : public ofBaseApp{
 
 public:
@@ -29,8 +31,9 @@ public:
     MovingCamera cam;
     
     int state = 0;
-    vector<boost::shared_ptr<SceneBase>> scenes;
-    vector<int> sceneList;
+    std::vector<ofPtr<SceneBase>> scenes;
+    std::vector<int> sceneList;
     
     ofxOscReceiver receiver;
+    ofxSpout::Sender spoutSender;
 };

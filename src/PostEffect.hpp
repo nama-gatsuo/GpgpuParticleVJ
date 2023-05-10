@@ -16,24 +16,30 @@ public:
     void setup();
     void begin();
     void end();
-    void draw();
+    void applyCorrection();
+    const ofTexture& getTexture() const {
+        return composite1.getTexture();
+    }
     
     void bang();
     void setMode(int mode);
+    void setNega(bool bNega) {
+        this->bNega = bNega;
+    }
+    bool isNega() const { return bNega; }
     void setParam(int ch, float val);
-    void enableNega();
-    void disableNega();
     
 private:
     ofFbo base;
-    ofFbo composite;
+    ofFbo composite0;
+    ofFbo composite1;
     
     int mode = 0;
-    float params[3] = { 1.0, 0.1, 0.0 };
+    float params[3] = { 1.0, 0.2, 1.0 };
     ofShader complexConv;
     ofShader mirrorConv;
     
-    bool isNega = false;
+    bool bNega = false;
     ofShader negaConv;
     ofShader gammaConv;
     

@@ -17,7 +17,8 @@ void PostEffect::setup(){
     
     base.allocate(s);
     
-    composite.allocate(ofGetWidth(), ofGetHeight(), GL_RGB32F);
+    composite0.allocate(ofGetWidth(), ofGetHeight(), GL_RGB8);
+    composite1.allocate(ofGetWidth(), ofGetHeight(), GL_RGB8);
     
     complexConv.load("shaders/Common/passThru.vert", "shaders/PostEffect/ComplexConv.frag");
     complexConv.begin();
@@ -43,26 +44,26 @@ void PostEffect::end(){
     
     base.end();
     
-    composite.begin();
+    composite0.begin();
     ofClear(0,0);
     ofSetColor(255);
     
     switch (mode) {
         case 0: break;
         case 1: {
-            complexConv.begin();
-            complexConv.setUniform1f("s1", params[0]);
-            complexConv.setUniform1f("s2", params[1]);
+            mirrorConv.begin();
+            mirrorConv.setUniform1i("mode", 0); // vertical
             break;
         }
         case 2: {
             mirrorConv.begin();
-            mirrorConv.setUniform1i("mode", 0); // horizontal
+            mirrorConv.setUniform1i("mode", 1); // horizontal
             break;
         }
         case 3: {
-            mirrorConv.begin();
-            mirrorConv.setUniform1i("mode", 1); // vertical
+            complexConv.begin();
+            complexConv.setUniform1f("s1", params[0]);
+            complexConv.setUniform1f("s2", params[1]);
             break;
         }
         default: break;
@@ -77,29 +78,33 @@ void PostEffect::end(){
         case 3: mirrorConv.end(); break;
         default: break;
     }
-    composite.end();
+    composite0.end();
     
     
 }
-void PostEffect::draw(){
+void PostEffect::applyCorrection(){
     
+    composite1.begin();
+    ofClear(0);
+
     ofSetColor(255);
     
-    if (isNega) negaConv.begin();
-    else gammaConv.begin();
+    gammaConv.begin();
+    gammaConv.setUniform1f("isNega", bNega ? 1.0f : 0.0f);
+
+    composite0.draw(0,0);
     
-    composite.draw(0,0);
-    
-    if (isNega) negaConv.end();
-    else gammaConv.end();
+    gammaConv.end();
+    composite1.end();
+
 }
 
 void PostEffect::bang() {
 
     float coin = ofRandom(1.0);
     
-    if (coin < 0.1) isNega = true;
-    else isNega = false;
+    if (coin < 0.1) bNega = true;
+    else bNega = false;
     
     coin = ofRandom(1.0);
     
@@ -112,6 +117,4 @@ void PostEffect::bang() {
 
 void PostEffect::setMode(int mode) { this->mode = mode; }
 void PostEffect::setParam(int ch, float val) { params[ch] = val; }
-void PostEffect::enableNega() { isNega = true; }
-void PostEffect::disableNega() { isNega = false; }
 

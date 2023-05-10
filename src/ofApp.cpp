@@ -1,20 +1,19 @@
 #include "ofApp.h"
 
-//--------------------------------------------------------------
 void ofApp::setup(){
     
     ofBackground(0);
     ofDisableAlphaBlending();
     ofDisableBlendMode();
-    
+    ofSetFrameRate(30);
     pe.setup();
     cam.setRadius(500);
     
-    boost::shared_ptr<SceneBase> sp0(new IfsPoints());
-    boost::shared_ptr<SceneBase> sp1(new SmoothedAttractor());
-    boost::shared_ptr<SceneBase> sp2(new StrangeAttractor());
-    boost::shared_ptr<SceneBase> sp3(new GalaxyCollision());
-    boost::shared_ptr<SceneBase> sp4(new SpiralSphere());
+    ofPtr<SceneBase> sp0 = std::make_shared<IfsPoints>();
+    ofPtr<SceneBase> sp1 = std::make_shared<SmoothedAttractor>();
+    ofPtr<SceneBase> sp2 = std::make_shared<StrangeAttractor>();
+    ofPtr<SceneBase> sp3 = std::make_shared<GalaxyCollision>();
+    ofPtr<SceneBase> sp4 = std::make_shared<SpiralSphere>();
     sp0->setup();
     sp1->setup();
     sp2->setup();
@@ -28,9 +27,10 @@ void ofApp::setup(){
     sceneList.push_back(state);
     
     receiver.setup(7401);
+
+    spoutSender.init("ParticleVJ");
 }
 
-//--------------------------------------------------------------
 void ofApp::update(){
     
     while (receiver.hasWaitingMessages()){
@@ -41,22 +41,22 @@ void ofApp::update(){
         vector<string> dirs = ofSplitString(address, "/");
         
         if (dirs[1] == "p") {
-            
+
             int i = ofToInt(dirs[2]);
             int val = m.getArgAsInt32(0);
-            
+
             if (i == 3) cam.setRadius(1.0 + 1000.0 * val / 128.0);
             else if (i == 4) dt = 0.001 + 0.1 * val / 128.0;
             else scenes[state]->setParam(i, val);
-            
+
         }
-        else if (dirs[1] == "scene") updateSceneList(m.getArgAsInt(0));
+        else if (dirs[1] == "scene") { state = ofClamp(m.getArgAsInt(0), 0, scenes.size() - 1); }
         else if (dirs[1] == "vol") vol = m.getArgAsFloat(0);
         else if (dirs[1] == "bang") {
             
             if (dirs[2] == "0") {
                 scenes[state]->randomize();
-                if (ofRandom(1.0) < 0.1) changeScene();
+                //if (ofRandom(1.0) < 0.1) changeScene();
             } else if (dirs[2] == "1") {
                 pe.bang();
             }
@@ -64,13 +64,12 @@ void ofApp::update(){
         }
         
     }
-    
+
     scenes[state]->update(dt);
     cam.update(dt);
     
 }
 
-//--------------------------------------------------------------
 void ofApp::draw(){
     
     ofClear(0);
@@ -82,17 +81,28 @@ void ofApp::draw(){
     
     cam.end();
     pe.end();
+
+    pe.applyCorrection();
+    pe.getTexture().draw(0, 0);
     
-    pe.draw();
-    
-    ofDrawBitmapString("fps:" + ofToString(ofGetFrameRate(), 4), 10, 20);
+    spoutSender.send(pe.getTexture());
+
+    // ofDrawBitmapString("fps:" + ofToString(ofGetFrameRate(), 4), 10, 20);
 }
 
-//--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
     if (key == ' ') scenes[state]->randomize();
-    if (key == 'f') ofToggleFullscreen();    
+    else if (key == '2') pe.setMode(1);
+    else if (key == '3') pe.setMode(2);
+    else if (key == '4') pe.setMode(3);
+    else if (key == '1') pe.setMode(0);
+    else if (key == 'b') pe.setNega(!pe.isNega());
+    else if (key == 'q') state = 0;
+    else if (key == 'w') state = 1;
+    else if (key == 'e') state = 2;
+    else if (key == 'r') state = 3;
+    else if (key == 't') state = 4;
 }
 
 void ofApp::changeScene(){

@@ -11,7 +11,7 @@ void main() {
     n.xy = gl_PointCoord.xy * 2.0 - 1.0;
     n.z = 1.0 - dot(n.xy, n.xy);
 
-    float pAlpha = smoothstep(0.0, 1.0, n.z);
+    float pAlpha = smoothstep(0.0, 1.0, n.z * 0.7);
 
     outputColor = vec4(vColor.rgb, pAlpha);
 
