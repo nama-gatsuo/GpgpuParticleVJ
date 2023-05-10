@@ -13,6 +13,11 @@
 #include "SpiralSphere.hpp"
 
 #include "ofxSpout.h"
+#include "ofxLayerFx.h"
+#include "ofxGui.h"
+
+#include "vjOscReceiver.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -24,10 +29,15 @@ public:
     
     void changeScene();
     void updateSceneList(int num);
-    
+    void setFX(int mode);
+
+    void onFeedbackChanged(float& v);
+    void onReverbChanged(float& t);
+    void onFilterChanged(float& t);
+
     float dt = 0.1;
     float vol = 0.1;
-    PostEffect pe;
+    ofxLayerFx::Processor pe;
     MovingCamera cam;
     
     int state = 0;
@@ -36,4 +46,14 @@ public:
     
     ofxOscReceiver receiver;
     ofxSpout::Sender spoutSender;
+
+    ofPtr<ofxLayerFx::FeedbackPass> feedback;
+    ofPtr<ofxLayerFx::PsuedoFocusBlurPass> focusBlur;
+    ofPtr<ofxLayerFx::ComplexConvPass> complexConv;
+    ofPtr<ofxLayerFx::MirrorPass> mirror;
+    ofPtr<ofxLayerFx::InvertPass> invert;
+
+    ofxPanel pane;
+
+    ofxVJ::OscReceiver oscReceiver;
 };

@@ -1,4 +1,4 @@
-#version 150
+#version 400
 
 uniform mat4 modelViewProjectionMatrix;
 in vec4 position; // random val in -1 ~ 1

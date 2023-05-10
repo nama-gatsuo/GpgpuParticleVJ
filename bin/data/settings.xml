@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<group>
+	<ofxLayerFx>
+		<FeedbackPass>
+			<active>1</active>
+			<rot>0.833333</rot>
+			<translate>0, 0</translate>
+			<scale>1.00745, 1.01011</scale>
+			<alpha>0</alpha>
+			<copyNum>1</copyNum>
+			<randButton>0</randButton>
+		</FeedbackPass>
+		<BarrelBlurChroma>
+			<active>1</active>
+			<barrelPower>0.302083</barrelPower>
+		</BarrelBlurChroma>
+		<MirrorPass>
+			<active>1</active>
+			<useHorizontal>0</useHorizontal>
+			<useVertical>0</useVertical>
+		</MirrorPass>
+		<InvertPass>
+			<active>0</active>
+			<isBW>1</isBW>
+		</InvertPass>
+		<PsuedoFocusPass>
+			<active>1</active>
+			<amount>0</amount>
+		</PsuedoFocusPass>
+		<Vignett>
+			<active>1</active>
+			<fallOff>0.53125</fallOff>
+		</Vignett>
+		<ColorCorrection>
+			<active>1</active>
+			<saturation>0.197917</saturation>
+			<contrast>1.13542</contrast>
+			<brightness>1.17708</brightness>
+			<gamma>0.6875</gamma>
+			<multColor>1, 1, 1, 1</multColor>
+			<gain>1</gain>
+		</ColorCorrection>
+		<ComplexConvPass>
+			<active>1</active>
+			<scale1>0</scale1>
+			<scale2>1</scale2>
+		</ComplexConvPass>
+	</ofxLayerFx>
+</group>

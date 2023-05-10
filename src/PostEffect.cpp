@@ -1,33 +1,25 @@
-//
-//  PostEffect.cpp
-//  LPVJ
-//
-//  Created by 永松 歩 on 2017/03/09.
-//
-//
-
 #include "PostEffect.hpp"
 
 void PostEffect::setup(){
     
     ofFbo::Settings s;
-    s.width = ofGetWidth();
-    s.height = ofGetHeight();
-    s.internalformat = GL_RGB32F;
+    s.width = 1280;
+    s.height = 720;
+    s.internalformat = GL_RGB8;
     
     base.allocate(s);
     
-    composite0.allocate(ofGetWidth(), ofGetHeight(), GL_RGB8);
-    composite1.allocate(ofGetWidth(), ofGetHeight(), GL_RGB8);
+    composite0.allocate(s.width, s.height, GL_RGB8);
+    composite1.allocate(s.width, s.height, GL_RGB8);
     
     complexConv.load("shaders/Common/passThru.vert", "shaders/PostEffect/ComplexConv.frag");
     complexConv.begin();
-    complexConv.setUniform2f("res", ofGetWidth(), ofGetHeight());
+    complexConv.setUniform2f("res", s.width, s.height);
     complexConv.end();
     
     mirrorConv.load("shaders/Common/passThru.vert", "shaders/PostEffect/MirrorConv.frag");
     mirrorConv.begin();
-    mirrorConv.setUniform2f("res", ofGetWidth(), ofGetHeight());
+    mirrorConv.setUniform2f("res", s.width, s.height);
     mirrorConv.end();
     
     negaConv.load("shaders/Common/passThru.vert", "shaders/PostEffect/NegativeConv.frag");

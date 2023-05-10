@@ -1,4 +1,4 @@
-#version 150
+#version 400
 #pragma include "../../Common/rand.glslinc.frag"
 
 uniform mat4 modelViewProjectionMatrix;
