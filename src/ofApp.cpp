@@ -5,9 +5,9 @@ void ofApp::setup() {
 	ofBackground(0);
 	ofDisableAlphaBlending();
 	ofDisableBlendMode();
-	ofSetFrameRate(30);
+	ofSetFrameRate(60);
 
-	pe.resize(1280, 720);
+	pe.resize(1920, 1080);
 	complexConv = pe.createPass<ofxLayerFx::ComplexConvPass>();
 	feedback = pe.createPass<ofxLayerFx::FeedbackPass>();
 	pe.createPass<ofxLayerFx::BurrelBlurChromaPass>();
@@ -36,7 +36,7 @@ void ofApp::setup() {
 	scenes.push_back(sp4);
 	sceneList.push_back(state);
 
-	//receiver.setup(8888);
+	receiver.setup(8888);
 
 	spoutSender.init("ParticleVJ");
 

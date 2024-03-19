@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ofxSpout.h"
+
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "PostEffect.hpp"
@@ -12,48 +14,46 @@
 #include "GalaxyCollision.hpp"
 #include "SpiralSphere.hpp"
 
-#include "ofxSpout.h"
 #include "ofxLayerFx.h"
 #include "ofxGui.h"
 
 #include "vjOscReceiver.h"
 
 
-class ofApp : public ofBaseApp{
-
+class ofApp : public ofBaseApp {
 public:
-    void setup();
-    void update();
-    void draw();
-    void keyPressed(int key);
-    
-    void changeScene();
-    void updateSceneList(int num);
-    void setFX(int mode);
+	void setup();
+	void update();
+	void draw();
+	void keyPressed(int key);
 
-    void onFeedbackChanged(float& v);
-    void onReverbChanged(float& t);
-    void onFilterChanged(float& t);
+	void changeScene();
+	void updateSceneList(int num);
+	void setFX(int mode);
 
-    float dt = 0.1;
-    float vol = 0.1;
-    ofxLayerFx::Processor pe;
-    MovingCamera cam;
-    
-    int state = 0;
-    std::vector<ofPtr<SceneBase>> scenes;
-    std::vector<int> sceneList;
-    
-    ofxOscReceiver receiver;
-    ofxSpout::Sender spoutSender;
+	void onFeedbackChanged(float& v);
+	void onReverbChanged(float& t);
+	void onFilterChanged(float& t);
 
-    ofPtr<ofxLayerFx::FeedbackPass> feedback;
-    ofPtr<ofxLayerFx::PsuedoFocusBlurPass> focusBlur;
-    ofPtr<ofxLayerFx::ComplexConvPass> complexConv;
-    ofPtr<ofxLayerFx::MirrorPass> mirror;
-    ofPtr<ofxLayerFx::InvertPass> invert;
+	float dt = 0.1;
+	float vol = 0.1;
+	ofxLayerFx::Processor pe;
+	MovingCamera cam;
 
-    ofxPanel pane;
+	int state = 0;
+	std::vector<ofPtr<SceneBase>> scenes;
+	std::vector<int> sceneList;
 
-    ofxVJ::OscReceiver oscReceiver;
+	ofxOscReceiver receiver;
+	ofxSpout::Sender spoutSender;
+
+	ofPtr<ofxLayerFx::FeedbackPass> feedback;
+	ofPtr<ofxLayerFx::PsuedoFocusBlurPass> focusBlur;
+	ofPtr<ofxLayerFx::ComplexConvPass> complexConv;
+	ofPtr<ofxLayerFx::MirrorPass> mirror;
+	ofPtr<ofxLayerFx::InvertPass> invert;
+
+	ofxPanel pane;
+
+	ofxVJ::OscReceiver oscReceiver;
 };

@@ -2,9 +2,11 @@
 precision highp float;
 
 uniform mat4 modelViewProjectionMatrix;
+uniform mat4 modelViewMatrix;
 in vec4 position; // random val in -1 ~ 1
 in vec4 color;
 
+out float vDepth;
 out vec4 vColor;
 
 uniform float alpha;
@@ -50,6 +52,7 @@ void main() {
     p = scale * p;
 
     gl_Position = modelViewProjectionMatrix * vec4(p.xyz, 1.0);
+    vDepth = (modelViewMatrix * vec4(p.xyz, 1.0)).z / 100.0;
     gl_PointSize = 1500.0 / gl_Position.w;
 
 }

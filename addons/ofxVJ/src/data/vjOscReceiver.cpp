@@ -1,5 +1,5 @@
-#include "vjOscReceiver.h"
 #include "ofApp.h"
+#include "vjOscReceiver.h"
 
 namespace ofxVJ {
 	float OscReceiver::currentTime = 0;

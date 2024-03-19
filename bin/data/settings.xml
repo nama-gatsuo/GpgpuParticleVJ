@@ -12,7 +12,7 @@
 		</FeedbackPass>
 		<BarrelBlurChroma>
 			<active>1</active>
-			<barrelPower>0.302083</barrelPower>
+			<barrelPower>0.0833333</barrelPower>
 		</BarrelBlurChroma>
 		<MirrorPass>
 			<active>1</active>
@@ -25,7 +25,7 @@
 		</InvertPass>
 		<PsuedoFocusPass>
 			<active>1</active>
-			<amount>0</amount>
+			<amount>0.0520833</amount>
 		</PsuedoFocusPass>
 		<Vignett>
 			<active>1</active>
@@ -33,9 +33,9 @@
 		</Vignett>
 		<ColorCorrection>
 			<active>1</active>
-			<saturation>0.197917</saturation>
-			<contrast>1.13542</contrast>
-			<brightness>1.17708</brightness>
+			<saturation>0</saturation>
+			<contrast>1.14583</contrast>
+			<brightness>1.28125</brightness>
 			<gamma>0.6875</gamma>
 			<multColor>1, 1, 1, 1</multColor>
 			<gain>1</gain>
