@@ -87,15 +87,22 @@ public:
             
             s.width = _width;
             s.height = _height;
-            s.internalformat = GL_RGB32F;
-            s.numColorbuffers = 2;
-            
+            //s.internalformat = GL_RGB32F;
+            s.minFilter = GL_NEAREST;
+            s.maxFilter = GL_NEAREST;
+            //s.numColorbuffers = 2;
+            s.colorFormats.push_back(GL_RGBA32F);
+            s.colorFormats.push_back(GL_RGBA32F);
+            s.useDepth = true;
+            s.useStencil = false;
+            s.depthStencilAsTexture = false;
+            s.numSamples = 0;
             FBOs[i].allocate(s);
-            FBOs[i].createAndAttachTexture(GL_RGBA32F, 1);
-            FBOs[i].createAndAttachTexture(GL_RGBA32F, 2);
-            
-            FBOs[i].getTexture(0).setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
-            FBOs[i].getTexture(1).setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
+            //FBOs[i].createAndAttachTexture(GL_RGBA32F, 1);
+            //FBOs[i].createAndAttachTexture(GL_RGBA32F, 2);
+            //
+            //FBOs[i].getTexture(0).setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
+            //FBOs[i].getTexture(1).setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
         }
         
         clear();

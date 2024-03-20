@@ -73,7 +73,7 @@ namespace ofxVJ {
 				int val = m.getArgAsInt(0);
 
 				if (i == 3) app.cam.setRadius(1.0 + 1000.0 * val / 128.0);
-				else if (i == 4) app.dt = 0.001 + 0.1 * val / 128.0;
+				else if (i == 4) app.dt = 0.001 + 0.04 * val / 128.0;
 				else app.scenes[app.state]->setParam(i, val);
 
 			}

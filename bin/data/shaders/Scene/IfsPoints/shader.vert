@@ -37,7 +37,7 @@ void main() {
     vec2 randomVec2 = vec2(p.x, p.y);
     float r;
 
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 32; i++) {
         r = random(randomVec2);
 
         if (r < w0) {
@@ -53,6 +53,6 @@ void main() {
 
     gl_Position = modelViewProjectionMatrix * vec4(p.xyz, 1.0);
     vDepth = (modelViewMatrix * vec4(p.xyz, 1.0)).z / 100.0;
-    gl_PointSize = 1500.0 / gl_Position.w;
+    gl_PointSize = 500.0 / gl_Position.w;
 
 }

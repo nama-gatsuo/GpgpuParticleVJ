@@ -28,7 +28,7 @@ private:
     ofShader updateRenderer;
     ofShader createData;
     
-    int wSize = 256, hSize = 512;
+    int wSize = 512, hSize = 512;
     PingPongBuffer pp;
     
     ofVec3f p0, p1, v0, v1, a0, a1;

@@ -23,7 +23,7 @@ public:
 private:
     CustomShader shader;
     ofVboMesh mesh;
-    int num = 200000;
+    int num = 1000000;
     
     SmoothValue ap[6];
     float params[6];

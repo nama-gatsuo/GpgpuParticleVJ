@@ -14,38 +14,41 @@ void SmoothedAttractor::setup(){
     for(int x = 0; x < wSize; x++){
         for(int y = 0; y < hSize; y++){
             mesh.addVertex(ofVec3f(ofRandom(-1,1), ofRandom(-1,1), ofRandom(-1,1)));
-            mesh.addColor(ofFloatColor(0.06 + ofRandom(-0.1, 0.1), 0.33 + ofRandom(-0.1, 0.1), 0.12 + ofRandom(-0.1, 0.1)));
+            mesh.addColor(ofFloatColor(ofRandom(1.0, 0.3), 0.5));
             mesh.addTexCoord(ofVec2f(x, y));
         }
     }
     
-    vector<float> pos(wSize * hSize * 3);
-    vector<float> vel(wSize * hSize * 3);
+    vector<float> pos(wSize * hSize * 4);
+    vector<float> vel(wSize * hSize * 4);
     
     for (int w = 0; w < wSize; w++) {
         for (int h = 0; h < hSize; h++) {
             
             int i = h * wSize + w;
             
-            pos[i*3] = ofRandom(1.0);
-            pos[i*3 + 1] = ofRandom(1.0);
-            pos[i*3 + 2] = ofRandom(1.0);
+            pos[i*4] = ofRandom(-1.0, 1.0);
+            pos[i*4 + 1] = ofRandom(-1.0, 1.0);
+            pos[i*4 + 2] = ofRandom(-1.0, 1.0);
+            pos[i * 4 + 3] = 0;
+
             
             ofVec3f v = ofVec3f(0.);
             
-            vel[i*3] = v.x;
-            vel[i*3 + 1] = v.y;
-            vel[i*3 + 2] = v.z;
+            vel[i*4] = v.x;
+            vel[i*4 + 1] = v.y;
+            vel[i*4 + 2] = v.z;
+            vel[i * 4 + 3] = 0;
             
         }
     }
     
     pp.allocate(wSize, hSize);
-    pp.src->getTexture(0).loadData(pos.data(), wSize, hSize, GL_RGB);
-    pp.dst->getTexture(0).loadData(pos.data(), wSize, hSize, GL_RGB);
+    pp.src->getTexture(0).loadData(pos.data(), wSize, hSize, GL_RGBA);
+    pp.dst->getTexture(0).loadData(pos.data(), wSize, hSize, GL_RGBA);
     
-    pp.src->getTexture(1).loadData(vel.data(), wSize, hSize, GL_RGB);
-    pp.dst->getTexture(1).loadData(vel.data(), wSize, hSize, GL_RGB);
+    pp.src->getTexture(1).loadData(vel.data(), wSize, hSize, GL_RGBA);
+    pp.dst->getTexture(1).loadData(vel.data(), wSize, hSize, GL_RGBA);
     
     updateData.load("shaders/Common/passThru.vert", "shaders/Scene/SmoothedAttractor/updateData.frag");
     updateRenderer.load("shaders/Scene/SmoothedAttractor/render");
@@ -88,6 +91,7 @@ void SmoothedAttractor::draw(float vol){
     
     updateRenderer.begin();
     updateRenderer.setUniform1f("alpha", vol);
+    updateRenderer.setUniform3f("aPos", aPos);
     updateRenderer.setUniformTexture("posData", pp.dst->getTexture(0), 0);
     
     mesh.draw();
@@ -98,7 +102,7 @@ void SmoothedAttractor::draw(float vol){
 
 void SmoothedAttractor::randomize(){
     
-    aPos.to(ofPoint(ofRandom(-3.0, 3.0), ofRandom(-3.0, 3.0), ofRandom(-3.0, 3.0)));
+    aPos.to(ofPoint(ofRandom(-7.0, 7.0), ofRandom(-7.0, 7.0), ofRandom(-7.0, 7.0)));
     
 }
 void SmoothedAttractor::setParam(int ch, float val){

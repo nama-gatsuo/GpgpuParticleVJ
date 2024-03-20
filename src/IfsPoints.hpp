@@ -49,7 +49,7 @@ public:
 private:
     CustomShader shader;
     ofVboMesh mesh;
-    int num = 200000;
+    int num = 1000000;
     
     AffineParams ap[2];
     

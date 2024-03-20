@@ -19,7 +19,7 @@ void StrangeAttractor::setup(){
     mesh.setMode(OF_PRIMITIVE_POINTS);
     for (int i = 0; i < num; i++) {
         mesh.addVertex(ofVec3f(ofRandom(-1.0,1.0),ofRandom(-1.0,1.0),ofRandom(-1.0,1.0)));
-        mesh.addColor(ofFloatColor(0.33 + ofRandom(-0.3, 0.3), 0.07, 0.28));
+        mesh.addColor(ofFloatColor(ofRandom(1.0, 0.3), 0.5));
     }
     
     for (int i = 0; i < 6; i++) {

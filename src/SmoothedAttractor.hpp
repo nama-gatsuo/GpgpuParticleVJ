@@ -24,8 +24,8 @@ private:
     
     ofVboMesh mesh;
     
-    int wSize = 512;
-    int hSize = 512;
+    int wSize = 1024;
+    int hSize = 1024;
     
     PingPongBuffer pp;
     

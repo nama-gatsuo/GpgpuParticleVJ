@@ -12,7 +12,7 @@
 		</FeedbackPass>
 		<BarrelBlurChroma>
 			<active>1</active>
-			<barrelPower>0.0833333</barrelPower>
+			<barrelPower>0.645833</barrelPower>
 		</BarrelBlurChroma>
 		<MirrorPass>
 			<active>1</active>
@@ -33,10 +33,10 @@
 		</Vignett>
 		<ColorCorrection>
 			<active>1</active>
-			<saturation>0</saturation>
+			<saturation>0.927083</saturation>
 			<contrast>1.14583</contrast>
-			<brightness>1.28125</brightness>
-			<gamma>0.6875</gamma>
+			<brightness>1.03125</brightness>
+			<gamma>0.770833</gamma>
 			<multColor>1, 1, 1, 1</multColor>
 			<gain>1</gain>
 		</ColorCorrection>

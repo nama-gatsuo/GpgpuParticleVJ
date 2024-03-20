@@ -35,7 +35,7 @@ public:
 	void onReverbChanged(float& t);
 	void onFilterChanged(float& t);
 
-	float dt = 0.1;
+	float dt = 0.05;
 	float vol = 0.1;
 	ofxLayerFx::Processor pe;
 	MovingCamera cam;
