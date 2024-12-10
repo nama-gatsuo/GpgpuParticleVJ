@@ -9,7 +9,7 @@ class OscReceiver {
 public:
 	OscReceiver() {
 		ofxOscReceiverSettings s;
-		s.port = 8888;
+		s.port = 8887;
 		receiver.setup(s);
 	}
 

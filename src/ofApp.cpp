@@ -36,7 +36,7 @@ void ofApp::setup() {
 	scenes.push_back(sp4);
 	sceneList.push_back(state);
 
-	receiver.setup(8888);
+	// receiver.setup(8888);
 
 	spoutSender.init("ParticleVJ");
 
@@ -153,14 +153,14 @@ void ofApp::onFeedbackChanged(float& v) {
 	}
 }
 
-void ofApp::onReverbChanged(float& t) {
+void ofApp::onBlurChanged(float& t) {
 	if (focusBlur) {
 		focusBlur->setAmount(t);
 	}
 
 }
 
-void ofApp::onFilterChanged(float& t) {
+void ofApp::onConvChanged(float& t) {
 	if (complexConv) {
 		complexConv->setScale1(glm::mix(0.0f, 1.0f, ofClamp(t * 2.0, 0, 1)));
 		complexConv->setScale2(glm::mix(1.0f, 0.2f, ofClamp(t * 2.0, 0, 1)));

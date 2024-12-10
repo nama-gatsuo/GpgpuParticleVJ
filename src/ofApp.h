@@ -32,8 +32,16 @@ public:
 	void setFX(int mode);
 
 	void onFeedbackChanged(float& v);
-	void onReverbChanged(float& t);
-	void onFilterChanged(float& t);
+	void onBlurChanged(float& t);
+	void onConvChanged(float& t);
+
+	void setDt(float a) {
+		dt = ofLerp(0.001, 0.08, a);;
+	}
+	void setRadius(float rad) {
+		cam.setRadius(rad);
+	}
+
 
 	float dt = 0.05;
 	float vol = 0.1;

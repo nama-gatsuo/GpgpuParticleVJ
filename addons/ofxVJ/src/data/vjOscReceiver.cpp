@@ -25,44 +25,17 @@ namespace ofxVJ {
 			const auto& addrPaths = ofSplitString(addr, "/", true);
 			if (addrPaths.empty()) continue;
 
-			if (addrPaths[0] == "currentTime") {
-				int id = m.getArgAsFloat(0);
-				currentTime = m.getArgAsFloat(0);
-			}
-			else if (addrPaths[0] == "drum") {
-				int id = m.getArgAsInt(0);
-				ofNotifyEvent(ofxVJ::Events::DrumIn, id);
-			}
-			else if (addrPaths[0] == "bar") {
-				bar = m.getArgAsInt(0);
-				ofNotifyEvent(ofxVJ::Events::Bar, bar);
-			}
-			else if (addrPaths[0] == "progress") {
-				float newProg = m.getArgAsFloat(0);
-				if (abs(newProg - progress) > 0.9) {
-					sceneNum++;
-					ofNotifyEvent(ofxVJ::Events::sceneStart, sceneNum);
-				}
-				progress = newProg;
-			}
-			else if (addrPaths[0] == "beat") {
-				beat = m.getArgAsInt(0);
-				ofNotifyEvent(ofxVJ::Events::Beat, beat);
-			}
-			else if (addrPaths[0] == "tempo") {
-				tempo = m.getArgAsInt(0);
-			}
-			else if (addrPaths[0] == "reverb_mix") {
+			if (addrPaths[0] == "blur") {
 				reverb = m.getArgAsFloat(0);
 				ofNotifyEvent(ofxVJ::Events::Reverb, reverb);
-				app.onReverbChanged(reverb);
+				app.onBlurChanged(reverb);
 			}
-			else if (addrPaths[0] == "filter_freq") {
+			else if (addrPaths[0] == "conv") {
 				lowcut = m.getArgAsFloat(0);
 				ofNotifyEvent(ofxVJ::Events::Lowcut, lowcut);
-				app.onFilterChanged(lowcut);
+				app.onConvChanged(lowcut);
 			}
-			else if (addrPaths[0] == "delay_feedback") {
+			else if (addrPaths[0] == "feedback") {
 				delayFeedback = m.getArgAsFloat(0);
 				ofNotifyEvent(ofxVJ::Events::DelayFeedback, delayFeedback);
 				app.onFeedbackChanged(delayFeedback);
@@ -78,14 +51,14 @@ namespace ofxVJ {
 
 			}
 			else if (addrPaths[0] == "scene") { app.state = ofClamp(m.getArgAsInt(0), 0, app.scenes.size() - 1); }
-			else if (addrPaths[0] == "vol") app.vol = m.getArgAsFloat(0);
+			else if (addrPaths[0] == "volume") app.vol = m.getArgAsFloat(0);
 			else if (addrPaths[0] == "bang") {
-				ofLog() << "bang";
-				if (addrPaths[1] == "0") {
+				int i = m.getArgAsInt(0);
+				if (i == 0) {
 					app.scenes[app.state]->randomize();
 					// if (ofRandom(1.0) < 0.1) changeScene();
 				}
-				else if (addrPaths[1] == "1") {
+				else if (i == 1) {
 					app.setFX(floor(ofRandom(0, 4)));
 					if (app.invert->isEnabled()) {
 						if (ofRandom(1.0f) > 0.4) app.invert->setEnabled(false);
@@ -95,6 +68,14 @@ namespace ofxVJ {
 					}
 				}
 
+			}
+			else if (addrPaths[0] == "dt") {
+				float f = m.getArgAsInt(0);
+				app.setDt(f);
+			}
+			else if (addrPaths[1] == "dt") {
+				float f = m.getArgAsInt(0);
+				app.setDt(f);
 			}
 		}
 	}
