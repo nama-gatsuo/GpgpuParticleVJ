@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "ofMain.h"
 
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 
 //========================================================================
 int main( ){
