@@ -36,7 +36,7 @@ public:
 	void onConvChanged(float& t);
 
 	void setDt(float a) {
-		dt = ofLerp(0.001, 0.08, a);;
+		dt = a;// ofLerp(0.001, 0.08, a);;
 	}
 	void setRadius(float rad) {
 		cam.setRadius(rad);

@@ -70,12 +70,12 @@ namespace ofxVJ {
 
 			}
 			else if (addrPaths[0] == "dt") {
-				float f = m.getArgAsInt(0);
+				float f = m.getArgAsFloat(0);
 				app.setDt(f);
 			}
-			else if (addrPaths[1] == "dt") {
-				float f = m.getArgAsInt(0);
-				app.setDt(f);
+			else if (addrPaths[0] == "cam" && addrPaths[1] == "dist") {
+				float dist = m.getArgAsFloat(0);
+				app.setRadius(dist);
 			}
 		}
 	}

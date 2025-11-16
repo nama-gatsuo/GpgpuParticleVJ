@@ -63,7 +63,7 @@ public:
     void to(float target){
         mTarget = target;
     }
-    float getValue(){
+    float getValue() const {
         return mValue;
     };
     void setSpeed(float speed){
@@ -152,6 +152,10 @@ public:
     void setRadius(float radius){
         this->radius.to(radius);
     };
+    float getRadius() const {
+        return radius.getValue();
+
+    }
     
 private:
     float speed = 0.01;

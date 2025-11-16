@@ -69,6 +69,8 @@ void ofApp::draw() {
 	pe.getTexture().draw(0, 0, ofGetWidth(), ofGetHeight());
 	spoutSender.send(pe.getTexture());
 	ofDrawBitmapString("fps:" + ofToString(ofGetFrameRate(), 4), 10, 20);
+	ofDrawBitmapString("cam/dist: " + ofToString(cam.getRadius(), 4), 10, 40);
+	ofDrawBitmapString("dt: " + ofToString(dt, 4), 10, 60);
 	pane.draw();
 }
 
