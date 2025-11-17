@@ -13,32 +13,31 @@ void SmoothedAttractor::setup(){
     mesh.setMode(OF_PRIMITIVE_POINTS);
     for(int x = 0; x < wSize; x++){
         for(int y = 0; y < hSize; y++){
-            mesh.addVertex(ofVec3f(ofRandom(-1,1), ofRandom(-1,1), ofRandom(-1,1)));
-            mesh.addColor(ofFloatColor(ofRandom(1.0, 0.3), 0.5));
-            mesh.addTexCoord(ofVec2f(x, y));
+            mesh.addVertex(glm::vec3(ofRandom(-1.0f, 1.0f), ofRandom(-1.0f, 1.0f), ofRandom(-1.0f, 1.0f)));
+            mesh.addColor(ofFloatColor(ofRandom(1.0f, 0.3f), 0.5f));
+            mesh.addTexCoord(glm::vec2(x, y));
         }
     }
     
-    vector<float> pos(wSize * hSize * 4);
-    vector<float> vel(wSize * hSize * 4);
+    std::vector<float> pos(wSize * hSize * 4);
+    std::vector<float> vel(wSize * hSize * 4);
     
     for (int w = 0; w < wSize; w++) {
         for (int h = 0; h < hSize; h++) {
             
             int i = h * wSize + w;
             
-            pos[i*4] = ofRandom(-1.0, 1.0);
-            pos[i*4 + 1] = ofRandom(-1.0, 1.0);
-            pos[i*4 + 2] = ofRandom(-1.0, 1.0);
-            pos[i * 4 + 3] = 0;
-
+            pos[i * 4 + 0] = ofRandom(-1.0f, 1.0f);
+            pos[i * 4 + 1] = ofRandom(-1.0f, 1.0f);
+            pos[i * 4 + 2] = ofRandom(-1.0f, 1.0f);
+            pos[i * 4 + 3] = 1.0f;
             
-            ofVec3f v = ofVec3f(0.);
+            glm::vec3 v = glm::vec3(0.f);
             
-            vel[i*4] = v.x;
-            vel[i*4 + 1] = v.y;
-            vel[i*4 + 2] = v.z;
-            vel[i * 4 + 3] = 0;
+            vel[i * 4 + 0] = v.x;
+            vel[i * 4 + 1] = v.y;
+            vel[i * 4 + 2] = v.z;
+            vel[i * 4 + 3] = 0.0f;
             
         }
     }
@@ -49,7 +48,7 @@ void SmoothedAttractor::setup(){
     
     pp.src->getTexture(1).loadData(vel.data(), wSize, hSize, GL_RGBA);
     pp.dst->getTexture(1).loadData(vel.data(), wSize, hSize, GL_RGBA);
-    
+
     updateData.load("shaders/Common/passThru.vert", "shaders/Scene/SmoothedAttractor/updateData.frag");
     updateRenderer.load("shaders/Scene/SmoothedAttractor/render");
     
@@ -74,9 +73,9 @@ void SmoothedAttractor::update(float dt){
     updateData.setUniform1f("ur", r.getValue());
     updateData.setUniform1f("dt", dt);
     
-    pp.src->draw(0, 0);
-    updateData.end();
+    pp.src->getTexture(0).draw(0, 0);
     
+    updateData.end();
     pp.dst->end();
     
     pp.swap();
@@ -84,10 +83,9 @@ void SmoothedAttractor::update(float dt){
 }
 void SmoothedAttractor::draw(float vol){
     
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
-    
-    enablePointSprite();
     ofClear(0);
+    enablePointSprite();
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
     
     updateRenderer.begin();
     updateRenderer.setUniform1f("alpha", vol);
@@ -98,11 +96,12 @@ void SmoothedAttractor::draw(float vol){
     
     updateRenderer.end();
     ofDisableBlendMode();
+
 }
 
 void SmoothedAttractor::randomize(){
     
-    aPos.to(ofPoint(ofRandom(-7.0, 7.0), ofRandom(-7.0, 7.0), ofRandom(-7.0, 7.0)));
+    aPos.to(ofPoint(ofRandom(-7.0f, 7.0f), ofRandom(-7.0f, 7.0f), ofRandom(-7.0f, 7.0f)));
     
 }
 void SmoothedAttractor::setParam(int ch, float val){
@@ -112,4 +111,9 @@ void SmoothedAttractor::setParam(int ch, float val){
         case 1: f.to(val / 128 * 0.1 + 0.001); break;
         default: break;
     }
+}
+
+void SmoothedAttractor::debugDraw() const
+{
+    pp.src->getTexture(0).draw(0, 0);
 }

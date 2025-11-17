@@ -141,6 +141,11 @@ void GalaxyCollision::randomize(){
 
 void GalaxyCollision::setParam(int ch, float val){}
 
+void GalaxyCollision::debugDraw() const
+{
+    pp.src->getTexture(0).draw(0, 0);
+}
+
 
 
 

@@ -16,6 +16,7 @@ public:
     virtual void draw(float vol){};
     virtual void randomize(){};
     virtual void setParam(int ch, float val){};
+    virtual void debugDraw() const {};
 };
 
 #endif /* SceneBase_hpp */

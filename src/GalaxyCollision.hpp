@@ -15,12 +15,12 @@
 
 class GalaxyCollision : public SceneBase{
 public:
-    virtual void setup();
-    virtual void update(float dt);
-    virtual void draw(float vol);
-    virtual void randomize();
-    virtual void setParam(int ch, float val);
-
+    void setup() override;
+    void update(float dt) override;
+    void draw(float vol) override;
+    void randomize() override;
+    void setParam(int ch, float val) override;
+    void debugDraw() const override;
 private:
     
     ofVboMesh mesh;

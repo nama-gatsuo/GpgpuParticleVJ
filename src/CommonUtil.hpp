@@ -87,13 +87,13 @@ public:
             
             s.width = _width;
             s.height = _height;
-            //s.internalformat = GL_RGB32F;
+            s.internalformat = GL_RGBA32F;
             s.minFilter = GL_NEAREST;
             s.maxFilter = GL_NEAREST;
-            //s.numColorbuffers = 2;
+            s.numColorbuffers = 2;
             s.colorFormats.push_back(GL_RGBA32F);
             s.colorFormats.push_back(GL_RGBA32F);
-            s.useDepth = true;
+            s.useDepth = false;
             s.useStencil = false;
             s.depthStencilAsTexture = false;
             s.numSamples = 0;

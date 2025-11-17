@@ -16,5 +16,4 @@ void main() {
     pAlpha *= smoothstep(-10.0, 0.0, vDepth);
 
     outputColor = vec4(vColor.rgb, pAlpha);
-
 }

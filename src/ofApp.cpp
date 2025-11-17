@@ -7,7 +7,7 @@ void ofApp::setup() {
 	ofDisableBlendMode();
 	ofSetFrameRate(60);
 
-	pe.resize(1920, 1080);
+	pe.resize(1920, 1080, GL_RGB8);
 	complexConv = pe.createPass<ofxLayerFx::ComplexConvPass>();
 	feedback = pe.createPass<ofxLayerFx::FeedbackPass>();
 	pe.createPass<ofxLayerFx::BurrelBlurChromaPass>();
@@ -38,7 +38,7 @@ void ofApp::setup() {
 
 	// receiver.setup(8888);
 
-	spoutSender.init("ParticleVJ");
+	spoutSender.init("ParticleVJ", 1920, 1080, GL_RGB8);
 
 	pane.setup();
 	pane.add(pe.getParameters());
@@ -68,6 +68,9 @@ void ofApp::draw() {
 
 	pe.getTexture().draw(0, 0, ofGetWidth(), ofGetHeight());
 	spoutSender.send(pe.getTexture());
+	
+	// scenes[state]->debugDraw();
+	
 	ofDrawBitmapString("fps:" + ofToString(ofGetFrameRate(), 4), 10, 20);
 	ofDrawBitmapString("cam/dist: " + ofToString(cam.getRadius(), 4), 10, 40);
 	ofDrawBitmapString("dt: " + ofToString(dt, 4), 10, 60);
@@ -110,7 +113,7 @@ void ofApp::changeScene() {
 
 void ofApp::updateSceneList(int num) {
 
-	vector<int>::iterator it;
+	std::vector<int>::iterator it;
 
 	for (it = sceneList.begin(); it < sceneList.end(); ++it) {
 		if (*it == num) {
