@@ -1,16 +1,5 @@
-//
-//  SmoothedAttractor.hpp
-//  LPVJ
-//
-//  Created by 永松 歩 on 2017/03/10.
-//
-//
-
-#ifndef SmoothedAttractor_hpp
-#define SmoothedAttractor_hpp
-
 #include "ofMain.h"
-#include "CommonUtil.hpp"
+#include "../CommonUtil.hpp"
 #include "SceneBase.hpp"
 
 class SmoothedAttractor : public SceneBase {
@@ -36,6 +25,3 @@ private:
     SmoothValue r, f;
     SmoothPoint aPos;
 };
-
-
-#endif /* SmoothedAttractor_hpp */

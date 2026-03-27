@@ -1,16 +1,5 @@
-//
-//  IfsPoints.hpp
-//  LPVJ
-//
-//  Created by 永松 歩 on 2017/03/10.
-//
-//
-
-#ifndef IfsPoints_hpp
-#define IfsPoints_hpp
-
 #include "ofMain.h"
-#include "CommonUtil.hpp"
+#include "../CommonUtil.hpp"
 #include "SceneBase.hpp"
 
 class AffineParams {
@@ -41,11 +30,11 @@ public:
 
 class IfsPoints : public SceneBase {
 public:
-    virtual void setup();
-    virtual void update(float dt);
-    virtual void draw(float volume);
-    virtual void randomize();
-    virtual void setParam(int ch, float val);
+    void setup() override;
+    void update(float dt) override;
+    void draw(float volume) override;
+    void randomize() override;
+    void setParam(int ch, float val) override;
 private:
     CustomShader shader;
     ofVboMesh mesh;
@@ -54,5 +43,3 @@ private:
     AffineParams ap[2];
     
 };
-
-#endif /* IfsPoints_hpp */

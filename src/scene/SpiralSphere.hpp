@@ -1,16 +1,5 @@
-//
-//  SpiralSphere.hpp
-//  LPVJ
-//
-//  Created by 永松 歩 on 2017/03/11.
-//
-//
-
-#ifndef SpiralSphere_hpp
-#define SpiralSphere_hpp
-
 #include "ofMain.h"
-#include "CommonUtil.hpp"
+#include "../CommonUtil.hpp"
 #include "SceneBase.hpp"
 
 class SParams {
@@ -60,11 +49,11 @@ public:
 
 class SpiralSphere : public SceneBase {
 public:
-    virtual void setup();
-    virtual void update(float dt);
-    virtual void draw(float vol);
-    virtual void randomize();
-    virtual void setParam(int ch, float val);
+    void setup() override;
+    void update(float dt) override;
+    void draw(float vol) override;
+    void randomize() override;
+    void setParam(int ch, float val) override;
     
 private:
     ofShader shader;
@@ -77,5 +66,3 @@ private:
     int spNum = 10;
     SParams ps[10];
 };
-
-#endif /* SpiralSphere_hpp */

@@ -1,19 +1,8 @@
-//
-//  GalaxyCollision.hpp
-//  LPVJ
-//
-//  Created by 永松 歩 on 2017/03/10.
-//
-//
-
-#ifndef GalaxyCollision_hpp
-#define GalaxyCollision_hpp
-
 #include "ofMain.h"
-#include "CommonUtil.hpp"
+#include "../CommonUtil.hpp"
 #include "SceneBase.hpp"
 
-class GalaxyCollision : public SceneBase{
+class GalaxyCollision : public SceneBase {
 public:
     void setup() override;
     void update(float dt) override;
@@ -28,7 +17,8 @@ private:
     ofShader updateRenderer;
     ofShader createData;
     
-    int wSize = 512, hSize = 512;
+    int wSize = 512;
+    int hSize = 512;
     PingPongBuffer pp;
     
     ofVec3f p0, p1, v0, v1, a0, a1;
@@ -38,13 +28,10 @@ private:
     float bulgeRad[2];
     float ratio[2];
     
-    float distance = 40.0;
-    float massRatio = 0.07;
+    float distance = 40.0f;
+    float massRatio = 0.07f;
     float speed = sqrt(GM / 2.0);
     
-    float angleX[2] = { 20.0, - 45.0 };
-    float angleY[2] = { 10.0, 0.0 };
+    float angleX[2] = { 20.0f, -45.0f };
+    float angleY[2] = { 10.0f, 0.0f };
 };
-
-
-#endif /* GalaxyCollision_hpp */

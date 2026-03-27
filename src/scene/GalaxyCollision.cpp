@@ -1,11 +1,3 @@
-//
-//  GalaxyCollision.cpp
-//  LPVJ
-//
-//  Created by 永松 歩 on 2017/03/10.
-//
-//
-
 #include "GalaxyCollision.hpp"
 
 void GalaxyCollision::setup(){

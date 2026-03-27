@@ -1,21 +1,10 @@
-//
-//  CommonUtil.hpp
-//  LPVJ
-//
-//  Created by 永松 歩 on 2017/03/09.
-//
-//
-
-#ifndef CommonUtil_hpp
-#define CommonUtil_hpp
-
+#pragma once
 #include "ofMain.h"
 
 static void enablePointSprite(){
     glEnable(GL_POINT_SPRITE);
     glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 }
-
 
 class CustomShader : public ofShader{
 public:
@@ -52,7 +41,6 @@ private:
     float mSpeed;
 };
 
-
 class SmoothValue {
 public:
     SmoothValue():mSpeed(0.05),mValue(0),mTarget(0){}
@@ -75,7 +63,6 @@ private:
     float mTarget;
     float mSpeed;
 };
-
 
 struct PingPongBuffer {
 public:
@@ -128,7 +115,6 @@ private:
     ofFbo FBOs[2];
 };
 
-
 class MovingCamera : public ofCamera {
 public:
     void to() {
@@ -165,6 +151,3 @@ private:
     
     float x, y, z;
 };
-
-
-#endif /* CommonUtil_hpp */
