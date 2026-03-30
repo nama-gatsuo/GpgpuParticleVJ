@@ -33,4 +33,5 @@ private:
 
     SmoothPoint tilt;
     float volDrive = 0.1f;
+    SmoothValue volSmooth;
 };

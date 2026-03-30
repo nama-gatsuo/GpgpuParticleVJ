@@ -37,7 +37,8 @@ void SmoothedAttractor::setup(){
             vel[i * 4 + 0] = v.x;
             vel[i * 4 + 1] = v.y;
             vel[i * 4 + 2] = v.z;
-            vel[i * 4 + 3] = 0.0f;
+            // Per-particle damping seed (0.0 - 1.0)
+            vel[i * 4 + 3] = ofRandom(0.2f, 1.0f);
             
         }
     }
@@ -63,7 +64,7 @@ void SmoothedAttractor::update(float dt){
     aPos.update(dt);
     
     pp.dst->begin();
-    ofClear(0);
+    ofClear(0.0f, 255.0f);
     pp.dst->activateAllDrawBuffers();
     
     updateData.begin();
@@ -71,6 +72,7 @@ void SmoothedAttractor::update(float dt){
     updateData.setUniformTexture("velData", pp.src->getTexture(1), 1);
     updateData.setUniform3f("aPos", aPos);
     updateData.setUniform1f("ur", r.getValue());
+    updateData.setUniform1f("uf", f.getValue());
     updateData.setUniform1f("dt", dt);
     
     pp.src->getTexture(0).draw(0, 0);
@@ -83,7 +85,7 @@ void SmoothedAttractor::update(float dt){
 }
 void SmoothedAttractor::draw(float vol){
     
-    ofClear(0);
+    ofClear(0.0f, 255.0f);
     enablePointSprite();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     
@@ -101,14 +103,17 @@ void SmoothedAttractor::draw(float vol){
 
 void SmoothedAttractor::randomize(){
     
-    aPos.to(ofPoint(ofRandom(-7.0f, 7.0f), ofRandom(-7.0f, 7.0f), ofRandom(-7.0f, 7.0f)));
+    aPos.to(glm::vec3(ofRandom(-7.0f, 7.0f), ofRandom(-7.0f, 7.0f), ofRandom(-7.0f, 7.0f)));
+    // Re-randomize parameters here instead of setParam
+    r.to(ofRandom(0.04f, 0.14f));
+    f.to(ofRandom(0.02f, 0.62f));
     
 }
 void SmoothedAttractor::setParam(int ch, float val){
     
     switch (ch) {
-        case 0: r.to(val / 128 * 0.1 + 0.04); break;
-        case 1: f.to(val / 128 * 0.1 + 0.001); break;
+        case 0: break;
+        case 1: break;
         default: break;
     }
 }

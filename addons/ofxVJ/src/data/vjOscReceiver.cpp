@@ -60,12 +60,6 @@ namespace ofxVJ {
 				}
 				else if (i == 1) {
 					app.setFX(floor(ofRandom(0, 4)));
-					if (app.invert->isEnabled()) {
-						if (ofRandom(1.0f) > 0.4) app.invert->setEnabled(false);
-					}
-					else {
-						if (ofRandom(1.0f) > 0.9) app.invert->setEnabled(true);
-					}
 				}
 
 			}

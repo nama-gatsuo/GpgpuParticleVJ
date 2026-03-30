@@ -39,7 +39,17 @@ void FractalFlame::setup() {
     updateData.load("shaders/Common/passThru.vert", "shaders/Scene/FractalFlame/updateData.frag");
     updateRenderer.load("shaders/Scene/FractalFlame/render");
 
-    volSmooth.setSpeed(0.8f);
+    volSmooth.setSpeed(0.02f);
+    for (int i = 0; i < kNumXform; i++) {
+        m0S[i].setSpeed(paramSmooth);
+        m1S[i].setSpeed(paramSmooth);
+        m2S[i].setSpeed(paramSmooth);
+        tS[i].setSpeed(paramSmooth);
+        wS[i].setSpeed(paramSmooth);
+        varSinS[i].setSpeed(paramSmooth);
+        varSwirlS[i].setSpeed(paramSmooth);
+        varSphS[i].setSpeed(paramSmooth);
+    }
     randomize();
 }
 
@@ -48,6 +58,25 @@ void FractalFlame::update(float dt) {
     phase += dt * phaseSpeed;
     volSmooth.update(dt);
     volDrive = volSmooth.getValue();
+    for (int i = 0; i < kNumXform; i++) {
+        m0S[i].update(dt);
+        m1S[i].update(dt);
+        m2S[i].update(dt);
+        tS[i].update(dt);
+        wS[i].update(dt);
+        varSinS[i].update(dt);
+        varSwirlS[i].update(dt);
+        varSphS[i].update(dt);
+
+        m0[i] = glm::vec3(m0S[i].x, m0S[i].y, m0S[i].z);
+        m1[i] = glm::vec3(m1S[i].x, m1S[i].y, m1S[i].z);
+        m2[i] = glm::vec3(m2S[i].x, m2S[i].y, m2S[i].z);
+        trans[i] = glm::vec3(tS[i].x, tS[i].y, tS[i].z);
+        weights[i] = wS[i].getValue();
+        varSin[i] = varSinS[i].getValue();
+        varSwirl[i] = varSwirlS[i].getValue();
+        varSph[i] = varSphS[i].getValue();
+    }
 
     pp.dst->begin();
     ofClear(0.0f, 255.0f);
@@ -96,15 +125,16 @@ void FractalFlame::draw(float vol) {
 void FractalFlame::randomize() {
 
     float sum = 0.0f;
+    std::array<float, kNumXform> wTarget;
     for (int i = 0; i < kNumXform; i++) {
-        weights[i] = ofRandom(0.2f, 1.0f);
-        sum += weights[i];
+        wTarget[i] = ofRandom(0.4f, 0.9f);
+        sum += wTarget[i];
 
         glm::vec3 axis = glm::normalize(glm::vec3(ofRandom(-1.0f, 1.0f), ofRandom(-1.0f, 1.0f), ofRandom(-1.0f, 1.0f)));
-        float ang = ofRandom(-PI, PI);
-        float sx = ofRandom(0.2f, 1.1f);
-        float sy = ofRandom(0.2f, 1.1f);
-        float sz = ofRandom(0.2f, 1.1f);
+        float ang = ofRandom(-PI * 0.7f, PI * 0.7f);
+        float sx = ofRandom(0.35f, 0.95f);
+        float sy = ofRandom(0.35f, 0.95f);
+        float sz = ofRandom(0.35f, 0.95f);
         glm::mat3 rot = glm::mat3_cast(glm::angleAxis(ang, axis));
         glm::mat3 scale = glm::mat3(
             glm::vec3(sx, 0.0f, 0.0f),
@@ -113,22 +143,26 @@ void FractalFlame::randomize() {
         );
         glm::mat3 m = rot * scale;
 
-        m0[i] = m[0];
-        m1[i] = m[1];
-        m2[i] = m[2];
+        m0S[i].to(ofPoint(m[0].x, m[0].y, m[0].z));
+        m1S[i].to(ofPoint(m[1].x, m[1].y, m[1].z));
+        m2S[i].to(ofPoint(m[2].x, m[2].y, m[2].z));
 
-        trans[i] = glm::vec3(ofRandom(-0.8f, 0.8f), ofRandom(-0.8f, 0.8f), ofRandom(-0.8f, 0.8f));
+        tS[i].to(ofPoint(
+            ofRandom(-0.55f, 0.55f),
+            ofRandom(-0.55f, 0.55f),
+            ofRandom(-0.55f, 0.55f)
+        ));
 
-        varSin[i] = ofRandom(0.0f, 1.0f);
-        varSwirl[i] = ofRandom(0.0f, 1.0f);
-        varSph[i] = ofRandom(0.0f, 1.0f);
+        varSinS[i].to(ofRandom(0.1f, 0.8f));
+        varSwirlS[i].to(ofRandom(0.1f, 0.8f));
+        varSphS[i].to(ofRandom(0.1f, 0.8f));
     }
 
     for (int i = 0; i < kNumXform; i++) {
-        weights[i] /= sum;
+        wS[i].to(wTarget[i] / sum);
     }
 
-    phaseSpeed = ofRandom(0.2f, 0.8f);
+    phaseSpeed = ofRandom(0.25f, 0.6f);
 }
 
 void FractalFlame::setParam(int ch, float val) {

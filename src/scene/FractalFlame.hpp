@@ -37,4 +37,14 @@ private:
     float phaseSpeed = 0.35f;
     float volDrive = 0.1f;
     SmoothValue volSmooth;
+
+    float paramSmooth = 0.05f;
+    std::array<SmoothPoint, kNumXform> m0S;
+    std::array<SmoothPoint, kNumXform> m1S;
+    std::array<SmoothPoint, kNumXform> m2S;
+    std::array<SmoothPoint, kNumXform> tS;
+    std::array<SmoothValue, kNumXform> wS;
+    std::array<SmoothValue, kNumXform> varSinS;
+    std::array<SmoothValue, kNumXform> varSwirlS;
+    std::array<SmoothValue, kNumXform> varSphS;
 };

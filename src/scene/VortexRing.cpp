@@ -46,12 +46,15 @@ void VortexRing::setup() {
     updateRenderer.load("shaders/Scene/VortexRing/render");
 
     tilt.setSpeed(0.015f);
+    volSmooth.setSpeed(0.02f);
     randomize();
 }
 
 void VortexRing::update(float dt) {
 
     phase += dt * phaseSpeed;
+    volSmooth.update(dt);
+    volDrive = volSmooth.getValue();
     float tiltSpeed = 0.008f + volDrive * 0.06f;
     tilt.setSpeed(tiltSpeed);
     tilt.update(dt);
@@ -90,12 +93,12 @@ void VortexRing::draw(float vol) {
 
     enablePointSprite();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
-    volDrive = vol;
+    volSmooth.to(vol);
 
     updateRenderer.begin();
     float wobble = sin(phase * 0.9f);
     float wobble2 = sin(phase * 0.47f + 1.2f);
-    updateRenderer.setUniform1f("alpha", vol);
+    updateRenderer.setUniform1f("alpha", volDrive);
     updateRenderer.setUniform3f(
         "tilt",
         tilt.x + wobble * 35.0f,

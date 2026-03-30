@@ -19,7 +19,7 @@ void main() {
 
     pos = (pos - aPos) * 200.0;
     gl_Position = modelViewProjectionMatrix * vec4(pos, 1.0);
-    gl_PointSize = 500.0 / gl_Position.w;
+    gl_PointSize = 600.0 / gl_Position.w;
     vDepth = (modelViewMatrix * vec4(pos, 1.0)).z / 100.0;
     vColor = color * alpha;
 }

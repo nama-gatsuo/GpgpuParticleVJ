@@ -97,9 +97,9 @@ void main() {
     q *= 0.85;
     q *= (0.96 + 0.04 * sin(phase * 0.3));
     vec3 targetPos = q;
-    float smoothPos = 0.45 + react * 0.25;
+    float smoothPos = 0.4 + react * 0.25;
     vec3 newPos = mix(pos, targetPos, smoothPos);
-    newPos *= 0.995;
+    //newPos *= 0.995;
 
     vec3 targetCol = palette(idx) * (0.4 + 0.9 * react);
     col = mix(col, targetCol, 0.08 + react * 0.15);
