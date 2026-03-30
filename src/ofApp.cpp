@@ -25,18 +25,21 @@ void ofApp::setup() {
 	ofPtr<SceneBase> sp3 = std::make_shared<GalaxyCollision>();
 	ofPtr<SceneBase> sp4 = std::make_shared<SpiralSphere>();
 	ofPtr<SceneBase> sp5 = std::make_shared<VortexRing>();
+	ofPtr<SceneBase> sp6 = std::make_shared<FractalFlame>();
 	sp0->setup();
 	sp1->setup();
 	sp2->setup();
 	sp3->setup();
 	sp4->setup();
 	sp5->setup();
+	sp6->setup();
 	scenes.push_back(sp0);
 	scenes.push_back(sp1);
 	scenes.push_back(sp2);
 	scenes.push_back(sp3);
 	scenes.push_back(sp4);
 	scenes.push_back(sp5);
+	scenes.push_back(sp6);
 	sceneList.push_back(state);
 
 	// receiver.setup(8888);
@@ -77,6 +80,7 @@ void ofApp::draw() {
 	ofDrawBitmapString("fps:" + ofToString(ofGetFrameRate(), 4), 10, 20);
 	ofDrawBitmapString("cam/dist: " + ofToString(cam.getRadius(), 4), 10, 40);
 	ofDrawBitmapString("dt: " + ofToString(dt, 4), 10, 60);
+	ofDrawBitmapString("osc/vol: " + ofToString(vol, 4), 10, 80);
 	pane.draw();
 }
 
@@ -104,6 +108,7 @@ void ofApp::keyPressed(int key) {
 	else if (key == 'r') state = 3;
 	else if (key == 't') state = 4;
 	else if (key == 'y') state = 5;
+	else if (key == 'u') state = 6;
 }
 
 void ofApp::changeScene() {
