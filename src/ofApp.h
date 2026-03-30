@@ -13,6 +13,7 @@
 #include "scene/StrangeAttractor.hpp"
 #include "scene/GalaxyCollision.hpp"
 #include "scene/SpiralSphere.hpp"
+#include "scene/VortexRing.hpp"
 
 #include "ofxLayerFx.h"
 #include "ofxGui.h"

@@ -24,16 +24,19 @@ void ofApp::setup() {
 	ofPtr<SceneBase> sp2 = std::make_shared<StrangeAttractor>();
 	ofPtr<SceneBase> sp3 = std::make_shared<GalaxyCollision>();
 	ofPtr<SceneBase> sp4 = std::make_shared<SpiralSphere>();
+	ofPtr<SceneBase> sp5 = std::make_shared<VortexRing>();
 	sp0->setup();
 	sp1->setup();
 	sp2->setup();
 	sp3->setup();
 	sp4->setup();
+	sp5->setup();
 	scenes.push_back(sp0);
 	scenes.push_back(sp1);
 	scenes.push_back(sp2);
 	scenes.push_back(sp3);
 	scenes.push_back(sp4);
+	scenes.push_back(sp5);
 	sceneList.push_back(state);
 
 	// receiver.setup(8888);
@@ -80,6 +83,9 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
 
 	if (key == ' ') scenes[state]->randomize();
+	else if (key == '1') {
+		setFX(0);
+	}
 	else if (key == '2') {
 		setFX(1);
 	}
@@ -89,9 +95,6 @@ void ofApp::keyPressed(int key) {
 	else if (key == '4') {
 		setFX(3);
 	}
-	else if (key == '1') {
-		setFX(0);
-	}
 	else if (key == 'b') {
 		invert->setEnabled(!invert->isEnabled());
 	}
@@ -100,6 +103,7 @@ void ofApp::keyPressed(int key) {
 	else if (key == 'e') state = 2;
 	else if (key == 'r') state = 3;
 	else if (key == 't') state = 4;
+	else if (key == 'y') state = 5;
 }
 
 void ofApp::changeScene() {
