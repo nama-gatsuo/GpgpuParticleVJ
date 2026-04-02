@@ -26,6 +26,8 @@ void ofApp::setup() {
 	ofPtr<SceneBase> sp4 = std::make_shared<SpiralSphere>();
 	ofPtr<SceneBase> sp5 = std::make_shared<VortexRing>();
 	ofPtr<SceneBase> sp6 = std::make_shared<FractalFlame>();
+	ofPtr<SceneBase> sp7 = std::make_shared<ParticleLife3D>();
+	ofPtr<SceneBase> sp8 = std::make_shared<IfsGpuLoop>();
 	sp0->setup();
 	sp1->setup();
 	sp2->setup();
@@ -33,6 +35,8 @@ void ofApp::setup() {
 	sp4->setup();
 	sp5->setup();
 	sp6->setup();
+	sp7->setup();
+	sp8->setup();
 	scenes.push_back(sp0);
 	scenes.push_back(sp1);
 	scenes.push_back(sp2);
@@ -40,6 +44,8 @@ void ofApp::setup() {
 	scenes.push_back(sp4);
 	scenes.push_back(sp5);
 	scenes.push_back(sp6);
+	scenes.push_back(sp7);
+	scenes.push_back(sp8);
 	sceneList.push_back(state);
 
 	// receiver.setup(8888);
@@ -109,6 +115,8 @@ void ofApp::keyPressed(int key) {
 	else if (key == 't') state = 4;
 	else if (key == 'y') state = 5;
 	else if (key == 'u') state = 6;
+	else if (key == 'i') state = 7;
+	else if (key == 'o') state = 8;
 }
 
 void ofApp::changeScene() {

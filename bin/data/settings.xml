@@ -15,7 +15,7 @@
 			<barrelPower>0.822917</barrelPower>
 		</BarrelBlurChroma>
 		<MirrorPass>
-			<active>1</active>
+			<active>0</active>
 			<useHorizontal>0</useHorizontal>
 			<useVertical>0</useVertical>
 		</MirrorPass>
@@ -41,7 +41,7 @@
 			<gain>1</gain>
 		</ColorCorrection>
 		<ComplexConvPass>
-			<active>1</active>
+			<active>0</active>
 			<scale1>1</scale1>
 			<scale2>0.2</scale2>
 		</ComplexConvPass>

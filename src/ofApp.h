@@ -15,6 +15,8 @@
 #include "scene/SpiralSphere.hpp"
 #include "scene/VortexRing.hpp"
 #include "scene/FractalFlame.hpp"
+#include "scene/ParticleLife3D.hpp"
+#include "scene/IfsGpuLoop.hpp"
 
 #include "ofxLayerFx.h"
 #include "ofxGui.h"
