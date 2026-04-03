@@ -14,38 +14,35 @@ void ofApp::setup() {
 	mirror = pe.createPass<ofxLayerFx::MirrorPass>();
 	invert = pe.createPass<ofxLayerFx::InvertPass>();
 	focusBlur = pe.createPass<ofxLayerFx::PsuedoFocusBlurPass>();
+	glow = pe.createPass<ofxLayerFx::GlowPass>();
 	pe.createPass<ofxLayerFx::VignettPass>();
 	pe.createPass<ofxLayerFx::ColorCorrection>();
 
 	cam.setRadius(500);
+	CustomShader::resetTime(0.0f);
 
-	ofPtr<SceneBase> sp0 = std::make_shared<IfsPoints>();
+	// ofPtr<SceneBase> sp0 = std::make_shared<IfsPoints>();
 	ofPtr<SceneBase> sp1 = std::make_shared<SmoothedAttractor>();
-	ofPtr<SceneBase> sp2 = std::make_shared<StrangeAttractor>();
-	ofPtr<SceneBase> sp3 = std::make_shared<GalaxyCollision>();
-	ofPtr<SceneBase> sp4 = std::make_shared<SpiralSphere>();
-	ofPtr<SceneBase> sp5 = std::make_shared<VortexRing>();
-	ofPtr<SceneBase> sp6 = std::make_shared<FractalFlame>();
-	ofPtr<SceneBase> sp7 = std::make_shared<ParticleLife3D>();
-	ofPtr<SceneBase> sp8 = std::make_shared<IfsGpuLoop>();
-	sp0->setup();
+	ofPtr<SceneBase> sp2 = std::make_shared<GalaxyCollision>();
+	ofPtr<SceneBase> sp3 = std::make_shared<SpiralSphere>();
+	ofPtr<SceneBase> sp4 = std::make_shared<VortexRing>();
+	ofPtr<SceneBase> sp5 = std::make_shared<FractalFlame>();
+	ofPtr<SceneBase> sp6 = std::make_shared<ParticleLife3D>();
+	ofPtr<SceneBase> sp7 = std::make_shared<IfsGpuLoop>();
+	// sp0->setup();
 	sp1->setup();
-	sp2->setup();
 	sp3->setup();
 	sp4->setup();
 	sp5->setup();
 	sp6->setup();
 	sp7->setup();
-	sp8->setup();
-	scenes.push_back(sp0);
+	// scenes.push_back(sp0);
 	scenes.push_back(sp1);
-	scenes.push_back(sp2);
 	scenes.push_back(sp3);
 	scenes.push_back(sp4);
 	scenes.push_back(sp5);
 	scenes.push_back(sp6);
 	scenes.push_back(sp7);
-	scenes.push_back(sp8);
 	sceneList.push_back(state);
 
 	// receiver.setup(8888);
@@ -60,6 +57,7 @@ void ofApp::setup() {
 void ofApp::update() {
 
 	oscReceiver.update(*this);
+	CustomShader::advanceTime(dt);
 
 	scenes[state]->update(dt);
 	cam.update(dt);

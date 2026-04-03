@@ -39,37 +39,42 @@ void main() {
     vec3 p = position.xyz;
 
     int classId = clamp(int(floor(color.r * float(max(numClasses - 1, 1)) + 0.5)), 0, max(numClasses - 1, 0));
-    float cls = float(classId);
+    float cls = float(classId) * 2.0 + sin(time * phaseSpeed + float(classId) * 0.37) * 0.5 + 0.5;
     float seed = color.g;
 
     float R = 6.28318530718 / float(max(numClasses, 1));
     float clsPhase = R * cls;
-    float phase = time * phaseSpeed;
-
+    float phase = time * 1.0;
     float tClass = phase;
-
-    const int maxLoop = 64;
+    
+    const int maxLoop = 32;
+    // p += (hash11(seed * 91.0 + p.z * 1.11) - 0.5) * phaseSpeed * 100.0;
+    vec3 lastP = p;
     for (int j = 0; j < maxLoop; j++) {
         if (j >= loopCount) break;
 
         float jf = float(j);
-        float drift = hash31(vec3(seed * 13.7, jf * 0.73, cls * 0.19)) - 0.5;
-        float wJitter = (hash11(seed * 91.0 + jf * 1.11) - 0.5) * 0.4;
+        // float drift = hash31(vec3(seed * 13.7, jf * 0.73, cls * 0.19)) - 0.5;
+        float wJitter = (hash11(seed * 91.0 + jf * 1.11) - 0.5) * tSpread * 0.1;
 
-        float u = sin(p.x + drift * 0.2) + sin(clsPhase + p.y);
-        float v = cos(p.y - drift * 0.2) + cos(clsPhase + p.z);
-        float w = sin(p.z + wJitter) + sin(clsPhase + p.x);
-
-        p = vec3(u + tClass, v + tClass, w);
+        float u = sin(p.x) + cos(clsPhase + p.y);
+        float v = cos(p.y) + sin(clsPhase + p.z);
+        float w = sin(p.z + wJitter) + cos(clsPhase + p.x);
+        lastP = vec3(u, v, w);
+        p = vec3(lastP.x + tClass, lastP.y + tClass, lastP.z + tClass);
     }
 
-    vec3 pos = p * worldScale;
+    // lastP.y -= 0.5;
+    vec3 pos = lastP * worldScale;
+    
     vec4 mv = modelViewMatrix * vec4(pos, 1.0);
     gl_Position = modelViewProjectionMatrix * vec4(pos, 1.0);
-    gl_PointSize = 1000.0 / gl_Position.w;
+    gl_PointSize = 500.0 / gl_Position.w;
 
     float classNorm = cls / max(float(numClasses - 1), 1.0);
     vec3 col = palette(classNorm) * mix(0.55, 1.25, color.b);
+    float luma = dot(col, vec3(0.299, 0.587, 0.114));
+    col = mix(vec3(luma), col, 0.45);
     vColor = vec4(col, alpha);
     vDepth = mv.z / 190.0;
 }

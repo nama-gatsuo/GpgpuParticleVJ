@@ -80,6 +80,36 @@
 		},
 		{
 			"path": "${workspaceRoot}/../addons\\ofxVJ"
+		},
+		{
+			"path": "${workspaceRoot}/../..\\..\\..\\addons\\ofxGui"
+		},
+		{
+			"path": "${workspaceRoot}/../..\\..\\..\\addons\\ofxLayerFx"
+		},
+		{
+			"path": "${workspaceRoot}/../..\\..\\..\\addons\\ofxOsc"
+		},
+		{
+			"path": "${workspaceRoot}/../..\\..\\..\\addons\\ofxSpout"
+		},
+		{
+			"path": "${workspaceRoot}/../addons\\ofxVJ"
+		},
+		{
+			"path": "${workspaceRoot}/../..\\..\\..\\addons\\ofxGui"
+		},
+		{
+			"path": "${workspaceRoot}/../..\\..\\..\\addons\\ofxLayerFx"
+		},
+		{
+			"path": "${workspaceRoot}/../..\\..\\..\\addons\\ofxOsc"
+		},
+		{
+			"path": "${workspaceRoot}/../..\\..\\..\\addons\\ofxSpout"
+		},
+		{
+			"path": "${workspaceRoot}/../addons\\ofxVJ"
 		}
 	],
 	"openFrameworksProjectGeneratorVersion": "0.103.0",

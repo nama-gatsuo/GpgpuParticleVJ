@@ -54,7 +54,6 @@ void IfsGpuLoop::randomize() {
     tBase.to(ofRandom(-0.25f, 0.25f));
     tSpread.to(ofRandom(0.03f, 0.34f));
     phaseSpeed.to(ofRandom(0.10f, 1.0f));
-    numClasses = static_cast<int>(ofRandom(16, 72));
 }
 
 void IfsGpuLoop::setParam(int ch, float val) {
@@ -64,7 +63,7 @@ void IfsGpuLoop::setParam(int ch, float val) {
         case 1: tBase.to(ofMap(val, 0, 127, -0.6f, 0.6f, true)); break;
         case 2: tSpread.to(ofMap(val, 0, 127, 0.0f, 0.8f, true)); break;
         case 3: break;
-        case 4: numClasses = static_cast<int>(ofMap(val, 0, 127, 4, 96, true)); break;
+        case 4: break;
         default: break;
     }
 }

@@ -64,6 +64,7 @@ public:
 	ofPtr<ofxLayerFx::ComplexConvPass> complexConv;
 	ofPtr<ofxLayerFx::MirrorPass> mirror;
 	ofPtr<ofxLayerFx::InvertPass> invert;
+	ofPtr<ofxLayerFx::GlowPass> glow;
 
 	ofxPanel pane;
 

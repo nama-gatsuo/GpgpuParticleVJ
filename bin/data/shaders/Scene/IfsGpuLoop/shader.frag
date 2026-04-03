@@ -12,6 +12,6 @@ void main() {
     float core = smoothstep(0.18, 0.0, r2);
     float depthFade = smoothstep(-15.0, 0.0, vDepth);
 
-    float a = (body * 0.65 + core * 0.55) * depthFade * vColor.a;
+    float a = (body * 0.65 + core * 0.55) * vColor.a;
     outputColor = vec4(vColor.rgb, a);
 }

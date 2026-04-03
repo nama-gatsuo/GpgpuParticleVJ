@@ -8,16 +8,28 @@ static void enablePointSprite(){
 
 class CustomShader : public ofShader{
 public:
+    static void resetTime(float t = 0.0f) {
+        simTime = t;
+    }
+    static void advanceTime(float dt) {
+        simTime += dt * 0.2;
+    }
+    static float getTime() {
+        return simTime;
+    }
+
     void begin(){
         ofShader::begin();
         setLazyUniforms();
     };
     void setLazyUniforms(){
-        setUniform1f("time", ofGetElapsedTimef());
+        setUniform1f("time", simTime);
         setUniform1f("frame", ofGetFrameNum());
         setUniform2f("res", ofGetWidth(), ofGetHeight());
     };
-    
+
+private:
+    inline static float simTime = 0.0f;
 };
 
 

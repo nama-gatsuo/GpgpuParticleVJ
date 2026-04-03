@@ -18,9 +18,9 @@ private:
     ofVboMesh mesh;
     int num = 1000000;
 
-    int numClasses = 48;
+    int numClasses = 1000;
     int loopCount = 64;
-    float worldScale = 50.0f;
+    float worldScale = 80.0f;
 
     SmoothValue tBase;
     SmoothValue tSpread;

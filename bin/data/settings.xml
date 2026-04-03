@@ -3,16 +3,16 @@
 	<ofxLayerFx>
 		<FeedbackPass>
 			<active>1</active>
-			<rot>0.833333</rot>
+			<rot>0</rot>
 			<translate>0, 0</translate>
-			<scale>1.00745, 1.01011</scale>
+			<scale>1, 1</scale>
 			<alpha>0.401042</alpha>
 			<copyNum>1</copyNum>
 			<randButton>0</randButton>
 		</FeedbackPass>
 		<BarrelBlurChroma>
 			<active>1</active>
-			<barrelPower>0.822917</barrelPower>
+			<barrelPower>1</barrelPower>
 		</BarrelBlurChroma>
 		<MirrorPass>
 			<active>0</active>
@@ -25,14 +25,14 @@
 		</InvertPass>
 		<PsuedoFocusPass>
 			<active>1</active>
-			<amount>0.234375</amount>
+			<amount>0.395833</amount>
 		</PsuedoFocusPass>
 		<Vignett>
-			<active>1</active>
-			<fallOff>0.53125</fallOff>
+			<active>0</active>
+			<fallOff>0</fallOff>
 		</Vignett>
 		<ColorCorrection>
-			<active>1</active>
+			<active>0</active>
 			<saturation>1</saturation>
 			<contrast>0.96875</contrast>
 			<brightness>1.78125</brightness>
@@ -45,5 +45,10 @@
 			<scale1>1</scale1>
 			<scale2>0.2</scale2>
 		</ComplexConvPass>
+		<Glow>
+			<active>1</active>
+			<threshold>0.411458</threshold>
+			<strength>0.585938</strength>
+		</Glow>
 	</ofxLayerFx>
 </group>
