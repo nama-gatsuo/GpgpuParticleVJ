@@ -364,7 +364,7 @@ icon.rc
 *.xcworkspacedata
 *.xcscheme
 #*.make
-Makefile
+# Makefile
 *.png
 bin/VjKit.exe
 *.exe

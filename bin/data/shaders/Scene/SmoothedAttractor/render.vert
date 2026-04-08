@@ -7,7 +7,6 @@ in vec4 color;
 
 uniform vec3 aPos;
 
-in float alpha;
 smooth out vec4 vColor;
 out float vDepth;
 
@@ -21,5 +20,5 @@ void main() {
     gl_Position = modelViewProjectionMatrix * vec4(pos, 1.0);
     gl_PointSize = 600.0 / gl_Position.w;
     vDepth = (modelViewMatrix * vec4(pos, 1.0)).z / 100.0;
-    vColor = color * alpha;
+    vColor = color;
 }

@@ -31,6 +31,7 @@ void ofApp::setup() {
 	ofPtr<SceneBase> sp7 = std::make_shared<IfsGpuLoop>();
 	// sp0->setup();
 	sp1->setup();
+	sp2->setup();
 	sp3->setup();
 	sp4->setup();
 	sp5->setup();
@@ -38,6 +39,7 @@ void ofApp::setup() {
 	sp7->setup();
 	// scenes.push_back(sp0);
 	scenes.push_back(sp1);
+	scenes.push_back(sp2);
 	scenes.push_back(sp3);
 	scenes.push_back(sp4);
 	scenes.push_back(sp5);
