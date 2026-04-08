@@ -47,7 +47,7 @@ void ofApp::setup() {
 
 	// receiver.setup(8888);
 
-	spoutSender.init("ParticleVJ", 1920, 1080, GL_RGB8);
+	spoutSender.init("of-particles", 1920, 1080, GL_RGB8);
 
 	pane.setup();
 	pane.add(pe.getParameters());
@@ -112,9 +112,6 @@ void ofApp::keyPressed(int key) {
 	else if (key == 'r') state = 3;
 	else if (key == 't') state = 4;
 	else if (key == 'y') state = 5;
-	else if (key == 'u') state = 6;
-	else if (key == 'i') state = 7;
-	else if (key == 'o') state = 8;
 }
 
 void ofApp::changeScene() {
